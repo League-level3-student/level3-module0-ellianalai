@@ -12,13 +12,20 @@ public class _02_RobotRace {
 
         // 2. create an array of 5 robots.
 		Robot r [] = new Robot[5];
+		Robot line = new Robot();
+		line.moveTo(0, 100);
+		line.setSpeed(30);
+		line.penDown();
+		line.turn(90);
+		line.move(1000);
 		int move = 0;
-		int yValue = 500;
+		boolean win = false;
 		Random rand = new Random();
         // 3. use a for loop to initialize the robots.
 		for(int i = 0; i<r.length; i++) {
 			r[i] = new Robot();
 			r[i].moveTo(130+move, 500);
+			r[i].setSpeed(10);
 			move+=150;
 		}
         // 4. make each robot start at the bottom of the screen, side by side, facing up
@@ -29,10 +36,14 @@ public class _02_RobotRace {
 		
         // 6. use a while loop to repeat step 5 until a robot has reached the top of the
         // screen.
-		while(yValue > 50) {
+		while(win == false) {
 			for(int i = 0; i<r.length; i++) {
 				r[i].move(rand.nextInt(50));
-				yValue = r[i].getY();
+				if(r[i].getY()<125) {
+					win = true;
+					System.out.println("Robot " + (i+1) + " is the winner!");
+				}
+				
 				}
 		}
         // 7. declare that robot the winner and throw it a party!
